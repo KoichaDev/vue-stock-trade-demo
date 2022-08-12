@@ -2,23 +2,27 @@
 	<section>
 		<h1>Buy Stocks!</h1>
 
-		<form @submit.prevent="submit" class="container">
+		<form ref="form" @submit.prevent="submit" class="container">
 			<div class="row">
 				<form-group-input
 					:id="'bmw'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.bmw"
-					v-model="enteredBMWValue"
-				></form-group-input>
+					v-model="enteredValues.bmw"
+				>
+					<button type="submit" class="btn btn-primary">Buy</button>
+				</form-group-input>
 
 				<form-group-input
 					:id="'google'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.google"
-					v-model="enteredGoogleValue"
-				></form-group-input>
+					v-model="enteredValues.google"
+				>
+					<button type="submit" class="btn btn-primary">Buy</button>
+				</form-group-input>
 			</div>
 
 			<div class="row">
@@ -27,41 +31,59 @@
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.apple"
-					v-model="enteredAppleValue"
-				></form-group-input>
+					v-model="enteredValues.apple"
+				>
+					<button type="submit" class="btn btn-primary">Buy</button>
+				</form-group-input>
 
 				<form-group-input
 					:id="'twitter'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.twitter"
-					v-model="enteredTwitterValue"
-				></form-group-input>
+					v-model="enteredValues.twitter"
+				>
+					<button type="submit" class="btn btn-primary">Buy</button>
+				</form-group-input>
 			</div>
 		</form>
 	</section>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { STOCK_DATA } from './data/stock-data';
-
+import * as types from '@/stores/modules/funds/funds.types';
 import FormGroupInput from '@/common/forms/FormGroupInput.vue';
+import { calculateTotalStockPrices } from './helpers/stocksUtils';
 
 export default {
 	data() {
 		return {
 			...STOCK_DATA,
-			enteredBMWValue: 0,
-			enteredGoogleValue: 0,
-			enteredAppleValue: 0,
-			enteredTwitterValue: 0,
+			enteredValues: {
+				bmw: 0,
+				google: 0,
+				apple: 0,
+				twitter: 0,
+			},
 		};
 	},
 	components: {
 		FormGroupInput,
 	},
 	methods: {
-		submit() {},
+		...mapActions({
+			buyStock: types.BUY_STOCK,
+		}),
+		submit() {
+			const totalValue = calculateTotalStockPrices(this.enteredValues);
+
+			this.buyStock(totalValue);
+
+			// Reset the form
+			this.$refs.form.reset();
+		},
 	},
 };
 </script>

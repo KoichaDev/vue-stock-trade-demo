@@ -9,13 +9,20 @@ const getters = {
 };
 
 const mutations = {
-    decrease: (state, payload) => {
+    [types.BUY_STOCK]: (state, payload) => {
         state.funds -= payload;
     },
 };
+
+const actions = {
+    [types.BUY_STOCK]: (context, payload) => {
+        context.commit(types.BUY_STOCK, payload);
+    }
+}
 
 export default {
     state,
     getters,
     mutations,
+    actions
 };

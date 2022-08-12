@@ -10,7 +10,7 @@
 			placeholder="quantity"
 			@input="$emit('input', parseFloat($event.target.value))"
 		/>
-		<button class="btn btn-primary">Buy</button>
+		<slot></slot>
 	</div>
 </template>
 
