@@ -1,8 +1,10 @@
 <template>
 	<header>
 		<nav class="navbar">
-			<p>💰<strong> Stock trading </strong></p>
-			<router-link class="text-decoration-none" to="/">Portfolio</router-link>
+			<router-link class="text-decoration-none" to="/"
+				>💰<strong> Stock trading </strong></router-link
+			>
+			<router-link class="text-decoration-none" to="/portfolio">Portfolio</router-link>
 			<router-link class="text-decoration-none" to="/stocks">Stocks</router-link>
 
 			<button class="[ btn btn-danger btn-sm ] [ ms-auto ]" type="button">End Day</button>

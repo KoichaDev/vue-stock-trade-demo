@@ -1,7 +1,7 @@
-import ViewPortfolio from '@/views/portfolios/ViewPortfolio.vue'
+import ViewHome from '@/views/home/ViewHome.vue'
 
 export const HOME_ROUTE = {
     path: '/',
-    name: 'portfolio-view',
-    component: ViewPortfolio,
+    name: 'home-view',
+    component: ViewHome,
 }
