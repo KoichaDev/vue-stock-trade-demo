@@ -4,35 +4,39 @@
 
 		<form @submit.prevent="submit" class="container">
 			<div class="row">
-				<form-group-number-input
+				<form-group-input
 					:id="'bmw'"
+					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.bmw"
 					v-model="enteredBMWValue"
-				></form-group-number-input>
+				></form-group-input>
 
-				<form-group-number-input
+				<form-group-input
 					:id="'google'"
+					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.google"
 					v-model="enteredGoogleValue"
-				></form-group-number-input>
+				></form-group-input>
 			</div>
 
 			<div class="row">
-				<form-group-number-input
+				<form-group-input
 					:id="'apple'"
+					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.apple"
 					v-model="enteredAppleValue"
-				></form-group-number-input>
+				></form-group-input>
 
-				<form-group-number-input
+				<form-group-input
 					:id="'twitter'"
+					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.twitter"
 					v-model="enteredTwitterValue"
-				></form-group-number-input>
+				></form-group-input>
 			</div>
 		</form>
 	</section>
@@ -41,7 +45,7 @@
 <script>
 import { STOCK_DATA } from './data/stock-data';
 
-import FormGroupNumberInput from '@/common/forms/FormGroupNumberInput.vue';
+import FormGroupInput from '@/common/forms/FormGroupInput.vue';
 
 export default {
 	data() {
@@ -54,7 +58,7 @@ export default {
 		};
 	},
 	components: {
-		FormGroupNumberInput,
+		FormGroupInput,
 	},
 	methods: {
 		submit() {},
