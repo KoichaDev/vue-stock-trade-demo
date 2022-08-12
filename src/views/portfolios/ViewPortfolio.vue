@@ -10,14 +10,22 @@
 		<hr />
 
 		<p class="fs-2">
-			<strong>Your Funds: ${{ currentFunds }}</strong>
+			<strong>Your Funds: ${{ funds }}</strong>
 		</p>
 	</section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import * as types from '@/stores/modules/funds/funds.types';
+
 export default {
-	name: 'HomeView',
+	name: 'portfolio-view',
+	computed: {
+		...mapGetters({
+			funds: types.CURRENT_FUND,
+		}),
+	},
 };
 </script>
 
