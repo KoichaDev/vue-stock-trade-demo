@@ -2,18 +2,18 @@
 	<section>
 		<h1>Buy Stocks!</h1>
 
-		<form @submit.prevent="" class="container">
+		<form @submit.prevent="submit" class="container">
 			<div class="row">
 				<form-group-number-input
 					:id="'bmw'"
-					:col="'col-6'"
+					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.bmw"
 					v-model="enteredBMWValue"
 				></form-group-number-input>
 
 				<form-group-number-input
 					:id="'google'"
-					:col="'col-6'"
+					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.google"
 					v-model="enteredGoogleValue"
 				></form-group-number-input>
@@ -22,14 +22,14 @@
 			<div class="row">
 				<form-group-number-input
 					:id="'apple'"
-					:col="'col-6'"
+					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.apple"
 					v-model="enteredAppleValue"
 				></form-group-number-input>
 
 				<form-group-number-input
 					:id="'twitter'"
-					:col="'col-6'"
+					:class="'[ col-6 p-1 ]'"
 					:label="stockPrice.twitter"
 					v-model="enteredTwitterValue"
 				></form-group-number-input>
@@ -55,6 +55,9 @@ export default {
 	},
 	components: {
 		FormGroupNumberInput,
+	},
+	methods: {
+		submit() {},
 	},
 };
 </script>

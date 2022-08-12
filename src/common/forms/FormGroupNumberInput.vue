@@ -1,8 +1,8 @@
 <template>
-	<div class="form-group" :class="className">
+	<div :class="className">
 		<label :for="id">
 			BMW
-			<span>(Price: {{ label }}</span>
+			<span>(Price): {{ label }}</span>
 		</label>
 		<input
 			type="number"
@@ -10,6 +10,7 @@
 			placeholder="quantity"
 			@input="$emit('input', parseFloat($event.target.value))"
 		/>
+		<button class="btn btn-primary">Buy</button>
 	</div>
 </template>
 
@@ -17,7 +18,10 @@
 export default {
 	props: {
 		id: String,
-		className: String,
+		className: {
+			type: String,
+			default: '[ form-group ]',
+		},
 		label: String,
 		value: {
 			type: Number,
