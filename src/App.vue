@@ -1,15 +1,16 @@
 <template>
 	<main id="app">
-		<home-layout></home-layout>
+		<navigation-bar></navigation-bar>
+		<router-view></router-view>
 	</main>
 </template>
 
 <script>
-import HomeLayout from './layouts/HomeLayout.vue';
+import NavigationBar from './base/NavigationBar.vue';
 
 export default {
 	components: {
-		HomeLayout,
+		NavigationBar,
 	},
 };
 </script>
