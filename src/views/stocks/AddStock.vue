@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { STOCK_DATA } from './data/stock-data';
 import * as types from '@/stores/modules/funds/funds.types';
 import FormGroupInput from '@/common/forms/FormGroupInput.vue';
@@ -72,12 +72,22 @@ export default {
 	components: {
 		FormGroupInput,
 	},
+	computed: {
+		...mapGetters({
+			funds: types.CURRENT_FUND,
+		}),
+	},
 	methods: {
 		...mapActions({
 			buyStock: types.BUY_STOCK,
 		}),
 		submit() {
 			const totalValue = calculateTotalStockPrices(this.enteredValues);
+			const currentFunds = this.funds;
+
+			if (currentFunds < totalValue) {
+				return alert('You do not have enough funds');
+			}
 
 			this.buyStock(totalValue);
 
