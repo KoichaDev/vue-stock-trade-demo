@@ -24,6 +24,7 @@ export default {
 			funds: types.CURRENT_FUND,
 		}),
 	},
+	methods: {},
 };
 </script>
 
