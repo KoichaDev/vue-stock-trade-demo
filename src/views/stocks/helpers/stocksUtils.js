@@ -7,3 +7,7 @@ export const calculateTotalStockPrices = (object = {}) => {
         return total + price;
     }, 0);
 };
+
+export const enteredStockBeenBought = (object = {}) => {
+    return Object.values(object).some((value) => value !== 0);
+}

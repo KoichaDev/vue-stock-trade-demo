@@ -2,6 +2,11 @@
 	<section>
 		<h1>Buy Stocks!</h1>
 
+		<pre>
+			{{ stockCollection }}
+		</pre
+		>
+
 		<form ref="form" @submit.prevent="submit" class="container">
 			<div class="row">
 				<form-group-input
@@ -56,6 +61,7 @@ import { STOCK_DATA } from './data/stock-data';
 import * as types from '@/stores/modules/funds/funds.types';
 import FormGroupInput from '@/common/forms/FormGroupInput.vue';
 import { calculateTotalStockPrices } from './helpers/stocksUtils';
+import { convertObjectToArray, filterOutEnteredValueZeroObject } from './helpers/objectUtils';
 
 export default {
 	data() {
@@ -75,13 +81,17 @@ export default {
 	computed: {
 		...mapGetters({
 			funds: types.CURRENT_FUND,
+			stockCollection: types.STOCK_COLLECTION,
 		}),
 	},
 	methods: {
 		...mapActions({
-			buyStock: types.BUY_STOCK,
+			payStock: types.BUY_STOCK,
+			addStockCollection: types.ADD_STOCK_COLLECTION,
 		}),
 		submit() {
+			// prettier-ignore
+			const enteredValuesNotContainsZeroValue = Object.values(this.enteredValues).some((value) => value !== 0);
 			const totalValue = calculateTotalStockPrices(this.enteredValues);
 			const currentFunds = this.funds;
 
@@ -89,7 +99,13 @@ export default {
 				return alert('You do not have enough funds');
 			}
 
-			this.buyStock(totalValue);
+			this.payStock(totalValue);
+
+			if (enteredValuesNotContainsZeroValue === true) {
+				const filteredValues = filterOutEnteredValueZeroObject(this.enteredValues);
+
+				this.addStockCollection(convertObjectToArray(filteredValues));
+			}
 
 			// Reset the form
 			this.$refs.form.reset();
