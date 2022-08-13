@@ -7,7 +7,9 @@
 			<router-link class="text-decoration-none" to="/portfolio">Portfolio</router-link>
 			<router-link class="text-decoration-none" to="/stocks">Stocks</router-link>
 
-			<button class="[ btn btn-danger btn-sm ] [ ms-auto ]" type="button">End Day</button>
+			<button type="button" class="[ btn btn-danger btn-sm ] [ ms-auto ]" @click="endDay">
+				End Day
+			</button>
 			<p>
 				<strong class="text-secondary"> Funds: ${{ funds }} </strong>
 			</p>
@@ -16,17 +18,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import * as types from '@/stores/modules/funds/funds.types';
+import { mapGetters, mapActions } from 'vuex';
+import * as fundTypes from '@/stores/modules/funds/funds.types';
+import * as stockTypes from '@/stores/modules/stocks/stocksTypes';
 
 export default {
 	name: 'navbar-component',
 	computed: {
 		...mapGetters({
-			funds: types.CURRENT_FUND,
+			funds: fundTypes.CURRENT_FUND,
 		}),
 	},
-	methods: {},
+	methods: {
+		...mapActions({
+			endDay: stockTypes.END_DAY_STOCKS_PRICES,
+		}),
+	},
 };
 </script>
 
@@ -38,6 +45,7 @@ export default {
 	gap: 2em;
 	padding: 2.5em;
 	background-color: #f5f5f5;
+
 	.navbar__button {
 		margin-left: auto;
 	}

@@ -2,12 +2,12 @@ import * as types from './funds.types';
 
 const state = {
     funds: 10000,
-    stockPortfolio: [],
+    quantityStocks: {},
 };
 
 const getters = {
     [types.CURRENT_FUND]: (state) => state.funds,
-    [types.CURRENT_STOCK_COLLECTION]: (state) => state.stockPortfolio,
+    [types.CURRENT_STOCK_COLLECTION]: (state) => state.quantityStocks,
 };
 
 const mutations = {
@@ -15,7 +15,7 @@ const mutations = {
         state.funds -= payload;
     },
     [types.ADD_STOCK_COLLECTION]: (state, payload) => {
-        state.stockPortfolio = [payload];
+        state.quantityStocks = payload;
     }
 };
 

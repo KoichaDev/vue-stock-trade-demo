@@ -13,7 +13,7 @@
 					:id="'bmw'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
-					:label="stockPrice.bmw"
+					:label="stockPrices.bmw"
 					v-model="enteredValues.bmw"
 				>
 					<button type="submit" class="btn btn-primary">Buy</button>
@@ -23,7 +23,7 @@
 					:id="'google'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
-					:label="stockPrice.google"
+					:label="stockPrices.google"
 					v-model="enteredValues.google"
 				>
 					<button type="submit" class="btn btn-primary">Buy</button>
@@ -35,7 +35,7 @@
 					:id="'apple'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
-					:label="stockPrice.apple"
+					:label="stockPrices.apple"
 					v-model="enteredValues.apple"
 				>
 					<button type="submit" class="btn btn-primary">Buy</button>
@@ -45,7 +45,7 @@
 					:id="'twitter'"
 					:type="'number'"
 					:class="'[ col-6 p-1 ]'"
-					:label="stockPrice.twitter"
+					:label="stockPrices.twitter"
 					v-model="enteredValues.twitter"
 				>
 					<button type="submit" class="btn btn-primary">Buy</button>
@@ -57,8 +57,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { STOCK_DATA } from './data/stock-data';
 import * as types from '@/stores/modules/funds/funds.types';
+import * as stockTypes from '@/stores/modules/stocks/stocksTypes';
 import FormGroupInput from '@/common/forms/FormGroupInput.vue';
 import { calculateTotalStockPrices } from './helpers/stocksUtils';
 import { convertObjectToArray, filterOutEnteredValueZeroObject } from './helpers/objectUtils';
@@ -66,7 +66,6 @@ import { convertObjectToArray, filterOutEnteredValueZeroObject } from './helpers
 export default {
 	data() {
 		return {
-			...STOCK_DATA,
 			enteredValues: {
 				bmw: 0,
 				google: 0,
@@ -81,6 +80,7 @@ export default {
 	computed: {
 		...mapGetters({
 			funds: types.CURRENT_FUND,
+			stockPrices: stockTypes.STOCKS_PRICES,
 			stockCollection: types.STOCK_COLLECTION,
 		}),
 	},
