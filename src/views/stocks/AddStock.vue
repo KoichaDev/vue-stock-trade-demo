@@ -6,7 +6,6 @@
 			{{ stockCollection }}
 		</pre
 		>
-
 		<form ref="form" @submit.prevent="submit" class="container">
 			<div class="row">
 				<form-group-input
@@ -60,7 +59,7 @@ import { mapGetters, mapActions } from 'vuex';
 import * as types from '@/stores/modules/funds/funds.types';
 import * as stockTypes from '@/stores/modules/stocks/stocksTypes';
 import FormGroupInput from '@/common/forms/FormGroupInput.vue';
-import { calculateTotalStockPrices } from './helpers/stocksUtils';
+import { sumTotalStockPrices, calculatePurchasedStocks } from './helpers/stocksUtils';
 import { convertObjectToArray, filterOutEnteredValueZeroObject } from './helpers/objectUtils';
 
 export default {
@@ -92,14 +91,15 @@ export default {
 		submit() {
 			// prettier-ignore
 			const enteredValuesNotContainsZeroValue = Object.values(this.enteredValues).some((value) => value !== 0);
-			const totalValue = calculateTotalStockPrices(this.enteredValues);
+			const purchasedStocksObj = calculatePurchasedStocks(this.stockPrices, this.enteredValues);
+			const sumTotalValue = sumTotalStockPrices(purchasedStocksObj);
 			const currentFunds = this.funds;
 
-			if (currentFunds < totalValue) {
+			if (currentFunds < sumTotalValue) {
 				return alert('You do not have enough funds');
 			}
 
-			this.payStock(totalValue);
+			this.payStock(sumTotalValue);
 
 			if (enteredValuesNotContainsZeroValue === true) {
 				const filteredValues = filterOutEnteredValueZeroObject(this.enteredValues);
