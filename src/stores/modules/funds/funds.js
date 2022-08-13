@@ -6,7 +6,7 @@ const state = {
 };
 
 const getters = {
-    [types.CURRENT_FUND]: (state) => state.funds,
+    [types.CURRENT_FUND]: (state) => state.funds.toFixed(2),
     [types.CURRENT_STOCK_COLLECTION]: (state) => state.quantityStocks,
 };
 
